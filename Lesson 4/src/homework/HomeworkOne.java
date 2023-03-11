@@ -9,12 +9,13 @@ public class HomeworkOne {
 		
 		System.out.println("Введите число больше 4, но меньше 16");
 		int userNumber = sc.nextInt();
+		long factorialNumber = userNumber;
 		
 		if (userNumber > 4 && userNumber < 16) {
 			for (int i=userNumber-1; i>0; i--) {
-				userNumber *= i;
+				factorialNumber *= i;
 			}
-			System.out.println("Факториал Вашего числа равен " + userNumber);
+			System.out.println("Факториал Вашего числа равен " + factorialNumber);
 		} else {
 			System.out.println("Число должно быть больше 4, но меньше 16");
 		}
