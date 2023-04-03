@@ -23,7 +23,7 @@ public class Cat extends Animal{
 
 	@Override
 	public String toString() {
-		return "Cat [name = " + name + "]";
+		return "Cat [name = " + name + ", color = " + super.getColor() + ", weight = " + super.getWeight() + " кг" + "]";
 	}
 
 	@Override
