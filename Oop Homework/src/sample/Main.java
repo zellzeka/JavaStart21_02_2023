@@ -1,5 +1,8 @@
 package sample;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -43,6 +46,19 @@ public class Main {
 		
 		firstGroup.removeStudentById(10);
 
+		System.out.println(firstGroup);
+		
+		Arrays.sort(firstGroup.getStudents(), Comparator.nullsLast(new StudentLasNameComparator()));
+		
+		System.out.println(firstGroup);
+		
+		
+		try {
+			firstGroup.addStudent(CustomStudent.scanStudentData());
+			firstGroup.addStudent(CustomStudent.scanStudentData());
+		} catch (CustomStudentInputException | GroupOverflowException e) {
+			e.printStackTrace();
+		} 
 		System.out.println(firstGroup);
 	}
 

@@ -10,8 +10,8 @@ public class Student extends Human {
 		this.groupName = groupName;
 	}
 
-	public Student(String name, String lastName, Gender gender) {
-		super(name, lastName, gender);
+	public Student() {
+		super();
 	}
 
 	public int getId() {
