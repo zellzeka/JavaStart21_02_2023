@@ -1,6 +1,7 @@
 package sample;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Group {
 	private String groupName;
@@ -66,6 +67,39 @@ public class Group {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(students);
+		result = prime * result + Objects.hash(groupName);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Group other = (Group) obj;
+		return Objects.equals(groupName, other.groupName) && Arrays.equals(students, other.students);
+	}
+	
+	public boolean compareStudents() {
+		boolean result = true;
+		for(int i = 0; i < students.length; i++) {
+			for (int j = i + 1; j < students.length; j++) {
+				if(students[i].equals(students[j])) {
+					result = false;
+				}
+			}
+		}
+		return result;
 	}
 	
 }
