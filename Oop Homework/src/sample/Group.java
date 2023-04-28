@@ -1,15 +1,17 @@
 package sample;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Group {
 	private String groupName;
-	private final Student[] students;
+	private List<Student> students;
 
 	public Group() {
 		super();
-		students = new Student[10];
+		this.students =  new ArrayList<Student>();
 	}
 
 	public String getGroupName() {
@@ -20,7 +22,7 @@ public class Group {
 		this.groupName = groupName;
 	}
 
-	public Student[] getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
@@ -36,46 +38,35 @@ public class Group {
 	}
 
 	public void addStudent(Student student) throws GroupOverflowException {
-		for (int i = 0; i < students.length; i++) {
-			if (students[i] == null) {
-				students[i] = student;				
-				return;
-			}
-			
+		if (students.size() <= 10) {
+			students.add(student);				
+		} else {
+			throw new GroupOverflowException("Группа переполнена");
 		}
-		throw new GroupOverflowException("Группа переполнена");
 	}
 	
 	public Student searchStudentByLastName(String lastName) throws StudentNotFoundException {
-		for(int i = 0; i < students.length; i++) {
-			if(students[i] != null) {
-				if (students[i].getLastName().equals(lastName)) {
-					return students[i];
-				}
+		for(Student element : students) {
+			if(element != null && element.getLastName().equals(lastName)) {
+					return element;
 			}
 		}
 		throw new StudentNotFoundException("Студент не найден");
 	}
 	
 	public boolean removeStudentById(int id) {
-		for(int i = 0; i < students.length; i++) {
-			if(students[i] != null) {
-				if(students[i].getId() == id) {
-					students[i] = null;
-					return true;
-				}
-			}
+		for(Student element : students) {
+			if(element != null && element.getId() == id) {
+				students.remove(element);
+				return true;
+			} 
 		}
 		return false;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(students);
-		result = prime * result + Objects.hash(groupName);
-		return result;
+		return Objects.hash(groupName, students);
 	}
 
 	@Override
@@ -87,14 +78,14 @@ public class Group {
 		if (getClass() != obj.getClass())
 			return false;
 		Group other = (Group) obj;
-		return Objects.equals(groupName, other.groupName) && Arrays.equals(students, other.students);
+		return Objects.equals(groupName, other.groupName) && Objects.equals(students, other.students);
 	}
-	
+
 	public boolean compareStudents() {
 		boolean result = true;
-		for(int i = 0; i < students.length; i++) {
-			for (int j = i + 1; j < students.length; j++) {
-				if(students[i].equals(students[j])) {
+		for(Student element : students) {
+			for (Student value : students) {
+				if(element.equals(value)) {
 					result = false;
 				}
 			}

@@ -2,6 +2,7 @@ package sample;
 
 import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -12,12 +13,12 @@ import java.io.BufferedReader;
 public class GroupFileStorage {
 	public static void saveGroupToCSV(Group gr) throws IOException {
 		File studentsList = new File(gr.getGroupName() + ".csv");
-		Student[] groupStudens = gr.getStudents();
+		List<Student> groupStudens = gr.getStudents();
 		String del = ",";
 		try(PrintWriter pw = new PrintWriter(studentsList)){
-			for(int i = 0; i < groupStudens.length; i++) {
-				if(groupStudens[i] != null) {
-					pw.println(groupStudens[i].getName() + del + groupStudens[i].getLastName() + del + groupStudens[i].getGender() + del + groupStudens[i].getId() + del + groupStudens[i].getGroupName());
+			for(Student element : groupStudens) {
+				if(element != null) {
+					pw.println(element.getName() + del + element.getLastName() + del + element.getGender() + del + element.getId() + del + element.getGroupName());
 			    }
 			}
 		}
